@@ -1,4 +1,12 @@
-node_modules/
-.venv/
-.env
-.aws-sam/
+# macOS
+.DS_Store
+
+# Node modules (frontend & api)
+**/node_modules/
+
+# Vite build output (frontend)
+frontend/dist/
+
+# Docker build output
+**/dist/
+
