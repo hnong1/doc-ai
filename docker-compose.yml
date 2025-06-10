@@ -1,0 +1,32 @@
+services:
+  ai:
+    build:
+      context: ./ai-python
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai-python:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./api
+    ports:
+      - "5050:5000"   # Host port changed to 5050 to avoid conflicts
+    volumes:
+      - ./api:/app
+    command: npm start
+    restart: unless-stopped
+    depends_on:
+      - ai
+
+  frontend:
+    image: nginx:alpine
+    volumes:
+      - ./frontend/public:/usr/share/nginx/html:ro
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    depends_on:
+      - api
