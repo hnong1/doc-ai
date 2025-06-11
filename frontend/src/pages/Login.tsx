@@ -1,64 +1,64 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/ai-illustration.svg";
+import Lottie from "lottie-react";
+import aiDocsAnimation from "../assets/animations/ai-docs.json";
 
 export default function Login() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-100 px-8 py-16">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-        {/* Illustration */}
-        <div className="hidden md:flex items-center justify-center bg-gradient-to-tr from-indigo-100 to-white p-12">
-          <img
-            src={logo}
-            alt="Doc-AI Illustration"
-            className="w-full max-w-[500px]"
-          />
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 px-4">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl w-full">
+        {/* Left Visual */}
+        <div className="flex flex-col items-center text-center md:w-1/2 relative">
+          <div className="absolute w-72 h-72 bg-white/20 rounded-full blur-3xl top-10 left-10 animate-float-slow z-0" />
+          <div className="w-64 z-10">
+            <Lottie animationData={aiDocsAnimation} loop={true} />
+          </div>
+          <h1 className="z-10 text-3xl font-semibold text-gray-800 mt-4">
+            Smarter Documents, Smarter You.
+          </h1>
+          <p className="z-10 mt-2 text-sm text-gray-600 max-w-sm">
+            Powering smarter workflows with document intelligence.
+          </p>
         </div>
 
-        {/* Form */}
-        <div className="p-16 md:p-20">
-          <h1 className="text-5xl font-extrabold text-gray-800 mb-4">Welcome Back</h1>
-          <p className="text-gray-600 mb-10 text-2xl">
-            Sign in to continue using <span className="font-semibold text-indigo-600">Doc-AI</span>
-          </p>
+        {/* Right Login Form */}
+        <div className="w-full max-w-xl bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-2xl p-10 z-10">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 text-center">
+            Welcome back to your intelligent workspace
+          </h2>
 
-          <form className="space-y-8 text-lg">
-            <div>
-              <label htmlFor="email" className="block text-gray-700 mb-2">
-                Email Address
+          <form className="space-y-5">
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg"
+            />
+            <div className="flex items-center justify-between text-sm text-gray-600">
+              <label className="flex items-center space-x-2">
+                <input type="checkbox" className="accent-purple-500" />
+                <span>Remember me</span>
               </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="you@example.com"
-                className="w-full px-6 py-4 border border-gray-300 rounded-xl shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
-              />
+              <Link to="#" className="text-purple-500 hover:underline">
+                Forgot password?
+              </Link>
             </div>
-
-            <div>
-              <label htmlFor="password" className="block text-gray-700 mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                className="w-full px-6 py-4 border border-gray-300 rounded-xl shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
-              />
-            </div>
-
             <button
               type="submit"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xl font-semibold py-4 rounded-xl transition duration-200 shadow-md"
+              className="w-full bg-purple-500 text-white p-4 rounded-xl hover:bg-purple-600 transition text-lg"
             >
-              Login
+              Log In
             </button>
           </form>
 
-          <p className="mt-10 text-center text-gray-600 text-md">
-            Don’t have an account?{" "}
-            <Link to="/signup" className="text-indigo-600 hover:underline font-medium">
-              Sign up here
+          <p className="text-center mt-6 text-sm text-gray-600">
+            New here?{" "}
+            <Link to="/signup" className="text-purple-500 hover:underline">
+              Create an account
             </Link>
           </p>
         </div>

@@ -1,76 +1,63 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/ai-illustration.svg";
+import Lottie from "lottie-react";
+import scanAnimation from "../assets/animations/scan-docs.json";
 
 export default function Signup() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-100 px-8 py-16">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-        {/* Illustration side */}
-        <div className="hidden md:flex items-center justify-center bg-gradient-to-tr from-indigo-100 to-white p-12">
-          <img
-            src={logo}
-            alt="Doc-AI Illustration"
-            className="w-full max-w-[500px]"
-          />
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-pink-100 to-purple-100 px-4">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl w-full">
+        {/* Visual Side */}
+        <div className="flex flex-col items-center text-center md:w-1/2 relative">
+          <div className="absolute w-72 h-72 bg-white/20 rounded-full blur-3xl top-10 left-10 animate-float-slow z-0" />
+          <div className="w-64 z-10">
+            <Lottie animationData={scanAnimation} loop={true} />
+          </div>
+          <h1 className="z-10 text-3xl font-semibold text-gray-800 mt-4">
+            Join the Future of AI-Powered Documents
+          </h1>
+          <p className="z-10 mt-2 text-sm text-gray-600 max-w-sm">
+            Fast. Smart. Reliable. Elevate your workflow today.
+          </p>
         </div>
 
-        {/* Form side */}
-        <div className="p-16 md:p-20">
-          <h1 className="text-5xl font-extrabold text-gray-800 mb-4">Create Your Account</h1>
-          <p className="text-gray-600 mb-10 text-2xl">
-            Get started with <span className="text-indigo-600 font-semibold">Doc-AI</span> in seconds.
-          </p>
-
-          <form className="space-y-8 text-lg">
-            <div>
-              <label htmlFor="name" className="block text-gray-700 mb-2">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                placeholder="John Doe"
-                className="w-full px-6 py-4 border border-gray-300 rounded-xl shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-gray-700 mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="you@example.com"
-                className="w-full px-6 py-4 border border-gray-300 rounded-xl shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-gray-700 mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Create a password"
-                className="w-full px-6 py-4 border border-gray-300 rounded-xl shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
+        {/* Signup Form */}
+        <div className="w-full max-w-xl bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-2xl p-10 z-10">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 text-center">
+            Create your Doc-AI account
+          </h2>
+          <form className="space-y-5">
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg"
+            />
             <button
               type="submit"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xl font-semibold py-4 rounded-xl transition duration-200 shadow-md"
+              className="w-full bg-blue-500 text-white p-4 rounded-xl hover:bg-blue-600 transition text-lg"
             >
               Sign Up
             </button>
           </form>
-
-          <p className="mt-10 text-center text-gray-600 text-md">
+          <p className="text-center mt-6 text-sm text-gray-600">
             Already have an account?{" "}
-            <Link to="/login" className="text-indigo-600 hover:underline font-medium">
-              Login here
+            <Link to="/login" className="text-blue-500 hover:underline">
+              Log in here
             </Link>
           </p>
         </div>
