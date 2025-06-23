@@ -44,8 +44,8 @@ export default function Support() {
           </p>
           <p className="text-lg text-gray-700">
             Contact us at:&nbsp;
-            <a href="mailto:support@doc-ai.com" className="text-blue-600 hover:underline">
-              support@doc-ai.com
+            <a href="mailto:docai.contact@gmail.com" className="text-blue-600 hover:underline">
+              docai.contact@gmail.com
             </a>
           </p>
         </div>

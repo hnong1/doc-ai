@@ -4,16 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function Translate() {
   const navigate = useNavigate();
-  const fileRef  = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
-  /* state */
-  const [mode, setMode]               = useState<"text" | "documents">("text");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [fromLang, setFromLang]       = useState("English");
-  const [toLang, setToLang]           = useState("Spanish");
-  const [file, setFile]               = useState<File | null>(null);
+  const [mode, setMode] = useState<"text" | "documents">("text");
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar starts closed
+  const [fromLang, setFromLang] = useState("English");
+  const [toLang, setToLang] = useState("Spanish");
+  const [file, setFile] = useState<File | null>(null);
 
-  /* fake docs */
   const savedDocs = [
     "Report_Q1_2025.docx",
     "Design_Spec_v3.pdf",
@@ -22,24 +20,21 @@ export default function Translate() {
     "Summary.md",
   ];
 
-  /* layout constants */
-  const SIDEBAR_W = 256;                          // px
-  const BTN_LEFT  = sidebarOpen ? SIDEBAR_W - 20 : 12;
+  const SIDEBAR_W = 256;
+  const BTN_LEFT = sidebarOpen ? SIDEBAR_W - 20 : 12;
 
   const handleTranslate = () => console.log({ fromLang, toLang, file });
 
-  /* navbar links (includes AI Chatbot) */
   const nav = [
-    { label: "Home",      path: "/" },
-    { label: "AI Chatbot",path: "/docchat" },   // ← new link
-    { label: "Support",   path: "/support" },
-    { label: "Settings",  path: "/settings" },
-    { label: "Log out",   path: "/signup" },
+    { label: "Home", path: "/" },
+    { label: "AI Chatbot", path: "/docchat" },
+    { label: "Support", path: "/support" },
+    { label: "Settings", path: "/settings" },
+    { label: "Log out", path: "/signup" },
   ];
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-blue-200 to-purple-200 overflow-hidden">
-      {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow transition-transform duration-300
                     ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
@@ -61,7 +56,6 @@ export default function Translate() {
         </div>
       </aside>
 
-      {/* Sidebar toggle */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
         style={{ left: BTN_LEFT }}
@@ -76,12 +70,10 @@ export default function Translate() {
         </svg>
       </button>
 
-      {/* Main */}
       <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"}`}>
-        {/* Navbar */}
         <header
           style={{ marginLeft: sidebarOpen ? SIDEBAR_W : 0 }}
-          className="fixed inset-x-0 top-0 bg-white border-b shadow z-40 transition-all"
+          className="fixed inset-x-0 top-0 bg-white shadow z-40 transition-all"
         >
           <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
             <h1 className="text-3xl font-bold">Doc-AI</h1>
@@ -95,33 +87,36 @@ export default function Translate() {
           </div>
         </header>
 
-        {/* Body */}
         <div className="pt-20 px-8 flex flex-col flex-1 overflow-hidden">
-          {/* Tabs */}
-          <div className="border-4 border-pink-200 rounded-lg mb-4">
-            <div className="flex">
+          <div className="rounded-lg mb-4">
+            <div className="flex gap-4 justify-center">
               {["text", "documents"].map((m) => (
                 <button
                   key={m}
                   onClick={() => setMode(m as "text" | "documents")}
-                  className={`flex-1 py-3 text-center ${mode === m ? "text-blue-600" : "text-gray-600"}`}
+                  className={`flex items-center justify-center gap-2 px-5 py-2 rounded-md font-medium shadow-sm transition
+                    ${mode === m
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-300"}`}
                 >
-                  {m === "text" ? <DocumentTextIcon className="inline-block h-5 w-5 mr-1" />
-                                : <DocumentArrowUpIcon className="inline-block h-5 w-5 mr-1" />}
+                  {m === "text" ? (
+                    <DocumentTextIcon className="h-5 w-5" />
+                  ) : (
+                    <DocumentArrowUpIcon className="h-5 w-5" />
+                  )}
                   {m.charAt(0).toUpperCase() + m.slice(1)}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Language selectors */}
           <div className="flex justify-center items-center gap-4 mb-4">
             {[fromLang, toLang].map((lang, idx) => (
               <select
                 key={idx}
                 value={lang}
                 onChange={(e) => idx ? setToLang(e.target.value) : setFromLang(e.target.value)}
-                className="px-4 py-2 border rounded bg-white"
+                className="px-4 py-2 rounded bg-white"
               >
                 {["English", "Spanish", "French", "German", "Chinese", "Japanese"].map((l) => (
                   <option key={l}>{l}</option>
@@ -133,17 +128,14 @@ export default function Translate() {
             </button>
           </div>
 
-          {/* hidden file input */}
           <input type="file" ref={fileRef} onChange={(e) => e.target.files && setFile(e.target.files[0])} className="hidden" />
 
-          {/* Panels */}
           <div className="flex flex-1 gap-6 overflow-hidden">
-            {/* Input */}
-            <div className="flex-1 p-4 border-4 border-pink-200 rounded-lg bg-white">
+            <div className="flex-1 p-4 rounded-lg bg-white">
               {mode === "text" ? (
                 <textarea className="w-full h-full outline-none resize-none" placeholder="Enter text" />
               ) : (
-                <div className="h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6">
+                <div className="h-full flex flex-col items-center justify-center p-6">
                   <p className="text-gray-600">Upload a document</p>
                   <button onClick={() => fileRef.current?.click()} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded">
                     Choose File
@@ -153,8 +145,7 @@ export default function Translate() {
               )}
             </div>
 
-            {/* Output */}
-            <div className="flex-1 p-4 border-4 border-pink-200 rounded-lg bg-white overflow-auto">
+            <div className="flex-1 p-4 rounded-lg bg-white overflow-auto">
               <h3 className="text-gray-500 mb-2">Translation</h3>
               <div className="h-full bg-gray-50 p-4" />
             </div>
