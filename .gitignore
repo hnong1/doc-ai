@@ -10,3 +10,4 @@ frontend/dist/
 # Docker build output
 **/dist/
 
+.env
